@@ -10,6 +10,41 @@ A small programming language created to solve `PMC` tasks on Programming Basics 
   - error handling
   - examples
 
+## usage
+### Compilation
+```
+$ python3 main.py foo.duh --compile
+```
+This will output `foo.pmc` file 
+
+### Execution
+```
+$ python3 main.py foo.duh --run
+```
+This will run the `foo.duh` file using builtin interpreter.
+Program expects `stdin` to be of form:
+```
+{number_of_cells_with_input} {number_of_cells_with_output}
+```
+Then `number_of_cells_with_input` rows of form:
+```
+{cell}: {value}
+```
+Then `number_of_cells_with_output` rows, each containing a single integer
+```
+{cell}
+```
+
+The machine will be initialized with input, and values from output cells will be printed on `stdout`
+
+Example input:
+```
+1 1
+100: 256
+101
+```
+
+
 
 ## syntax
 
