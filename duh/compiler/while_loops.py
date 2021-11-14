@@ -38,7 +38,7 @@ def compile_gt_while(node: WhileNode, compiler: Compiler):
 def compile_geq_while(node: WhileNode, compiler: Compiler):
     '''Compile while (>= a b)'''
     node.condition = invert_comparison(node.condition)
-    return compile_lt_while(node, compiler)
+    return compile_leq_while(node, compiler)
 
 
 def compile_while_with_builder(node, compiler, transform_condition,
