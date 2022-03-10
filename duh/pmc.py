@@ -1,3 +1,4 @@
+"""PMC interpreter - executes bytecode"""
 class Address:
     IMMEDIATE, DIRECT, INDIRECT, RELATIVE = range(4)
     TO_STR = ['.', '@', '*', '+']

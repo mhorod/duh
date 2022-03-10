@@ -10,7 +10,7 @@ from duh.pmc import Machine
 
 
 def compile_source(source):
-    """Compile textinto instruction"""
+    """Compile text into instruction"""
     tokens = lex(source)
     program_node = parse_tokens(tokens)
     instructions = compile_program(program_node, SimpleCompiler)
@@ -38,6 +38,15 @@ def compile_file(source_name, target_name):
 
 
 def run_file(source_name):
+    """Compiles file and runs it with extension check"""
+    extension = source_name.split('.')[-1]
+    if extension == "duh":
+        run_duh_file(source_name)
+    else:
+        print("Unknown file type")
+
+def run_duh_file(source_name):
+    """Executes file in duh language"""
     with open(source_name, "r", encoding="utf-8") as source_file:
         source = Source(source_name, source_file.read())
         instructions = compile_source(source)
@@ -55,13 +64,24 @@ def run_file(source_name):
     run_program(instructions, input_memory, output_memory)
 
 
-if __name__ == '__main__':
-    source_file_name = sys.argv[1]
-    mode = sys.argv[2]
-    if mode == '--compile':
-        name, _ = source_file_name.split('.')
-        target_file_name = name + '.pmc'
-        compile_file(source_file_name, target_file_name)
+def print_usage_info():
+    print("Usage:")
+    print("python3 main.py {filename} {mode}")
+    print("Where mode is either --compile or --run")
 
-    elif mode == '--run':
-        run_file(source_file_name)
+if __name__ == '__main__':
+    if len(sys.argv) == 3:
+        source_file_name = sys.argv[1]
+        mode = sys.argv[2]
+        if mode == '--compile':
+            name, _ = source_file_name.split('.')
+            target_file_name = name + '.pmc'
+            compile_file(source_file_name, target_file_name)
+        elif mode == '--run':
+            run_file(source_file_name)
+        else:
+            print(f"Unknown mode `{mode}`")
+            print_usage_info()
+    else:
+        print("Invalid number of arguments")
+        print_usage_info()

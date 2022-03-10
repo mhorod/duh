@@ -1,3 +1,4 @@
+"""Simple lexer for duh language"""
 import string
 from duh.lang import *
 
