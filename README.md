@@ -1,3 +1,4 @@
+<img src="duh.png" width=100/>
 # duh
 A small programming language created to solve `PMC` tasks on Programming Basics course
 
